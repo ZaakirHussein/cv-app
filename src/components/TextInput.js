@@ -17,7 +17,7 @@ function TextInput({
           onChange={onChange}
           value={value1}
           name={name1}
-          required="yes"
+          required
         ></input>
       </div>
       <div className="label-input">
@@ -27,6 +27,7 @@ function TextInput({
           onChange={onChange}
           value={value2}
           name={name2}
+          required
         ></input>
       </div>
     </div>

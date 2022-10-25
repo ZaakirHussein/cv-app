@@ -1,11 +1,21 @@
+import React from "react";
 import TextInput from "./TextInput";
 import EmailInput from "./EmailInput";
 
-const ApplicantInfo = ({ generalInfo, handleInputChange }) => {
-  const { firstName, lastName, email, residence, phone } = { generalInfo };
+const ApplicantInfo = ({
+  handleSubmit,
+  firstName,
+  lastName,
+  email,
+  confirmEmail,
+  residence,
+  phone,
+  handleInputChange,
+  formErrors,
+}) => {
   return (
-    <div className="general-info">
-      <div>
+    <form className="general-info" id="applicant-form" onSubmit={handleSubmit}>
+      <div className="input-pair">
         <TextInput
           onChange={handleInputChange}
           value1={firstName}
@@ -20,13 +30,11 @@ const ApplicantInfo = ({ generalInfo, handleInputChange }) => {
 
       <EmailInput
         onChange={handleInputChange}
-        value1={email}
-        placeholder1="Email"
-        name1="email"
-        value2={email}
-        placeholder2="Confirm your email"
-        name2="email"
-        labelClass="label-required"
+        emailValue={email}
+        placeholder="Email"
+        name="email"
+        confirmEmailValue={confirmEmail}
+        formErrors={formErrors}
       />
       <div className="input-pair">
         <div className="label-input">
@@ -39,17 +47,21 @@ const ApplicantInfo = ({ generalInfo, handleInputChange }) => {
           ></input>
         </div>
         <div className="label-input">
-          <label className="label-required">Phone number</label>
+          <div className="phone-label">
+            <label className="label-required">Phone number</label>
+            <span>Format: 123-456-7890</span>
+          </div>
           <input
             type="tel"
             onChange={handleInputChange}
             value={phone}
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             name="phone"
+            required
           ></input>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

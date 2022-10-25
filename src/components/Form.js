@@ -3,113 +3,211 @@ import ApplicantInfo from "./ApplicantInfo";
 import SchoolInfo from "./SchoolInfo";
 import WorkExperience from "./WorkExperience";
 import AddButton from "./AddButton";
-import RenderList from "./RenderList";
+import RenderEducationList from "./RenderEducationList";
+import RenderWorkList from "./RenderWorkList";
+import SubmitBtn from "./SubmitBtn";
 
 class ApplicationForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      applicant: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        residence: "",
-        phone: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      confirmEmail: "",
+      residence: "",
+      phone: "",
 
-        applicantEducation: {
-          schoolName: "",
-          major: "",
-          studyStart: "",
-          studyEnd: "",
-        },
-
-        applicantWorkExperience: {
-          companyName: "",
-          position: "",
-          description: "",
-          startDate: "",
-          endDate: "",
-          responsibilities: "",
-        },
-
-        educationArr: [],
-        workExperienceArr: [],
-      },
+      educationArr: [],
+      workExperienceArr: [],
 
       displayController: {
         educationDisplayed: false,
         educationList: false,
         workDisplayed: false,
+        workList: false,
+      },
+
+      formErrors: {
+        validateEmail: "",
+        validateConfirmEmail: "",
       },
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleClickDisplay = this.handleClickDisplay.bind(this);
-    this.handleCancelDisplay = this.handleCancelDisplay.bind(this);
+    this.handleShowDisplay = this.handleShowDisplay.bind(this);
+    this.handleHideDisplay = this.handleHideDisplay.bind(this);
     this.handleSaveEducation = this.handleSaveEducation.bind(this);
+    this.handleDeleteEducation = this.handleDeleteEducation.bind(this);
+    this.handleSaveEditedEducation = this.handleSaveEditedEducation.bind(this);
+    this.handleSaveWorkExperience = this.handleSaveWorkExperience.bind(this);
+    this.handleDeleteWork = this.handleDeleteWork.bind(this);
+    this.handleSaveEditedWork = this.handleSaveEditedWork.bind(this);
+    this.validateFormInput = this.validateFormInput.bind(this);
   }
-
-  // addNewTask = () => {
-  //   if (this.state.task.text === "") return;
-  //   this.state.tasks.push(this.state.task);
-  //   console.log(this.state.tasks);
-  // };
 
   handleSubmit(event) {
     event.preventDefault();
   }
 
-  handleClickDisplay = (category) => {
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleShowDisplay = (category) => {
     this.setState(() => ({
       [category]: true,
     }));
   };
 
-  handleCancelDisplay = (category) => {
+  handleHideDisplay = (category) => {
     this.setState(() => ({
       [category]: false,
     }));
   };
 
-  handleSaveEducation = (e) => {
-    e.preventDefault();
-
-    this.setState({
-      educationArr: this.state.applicant.educationArr.concat(
-        this.state.applicant.applicantEducation
-      ),
+  handleSaveEducation(object) {
+    this.setState((previousState) => ({
+      educationArr: [...previousState.educationArr, object],
       educationDisplayed: false,
       educationList: true,
+    }));
+  }
+
+  handleDeleteEducation(id) {
+    this.setState(() => ({
+      educationArr: this.state.educationArr.filter(
+        (schoolObj) => schoolObj.id !== id
+      ),
+    }));
+  }
+
+  handleSaveEditedEducation(arr) {
+    this.setState({
+      educationArr: arr,
     });
-  };
+  }
 
-  handleCancelClick = () => {};
+  handleSaveWorkExperience(object) {
+    this.setState((previousState) => ({
+      workExperienceArr: [...previousState.workExperienceArr, object],
+      workDisplayed: false,
+      workList: true,
+    }));
+  }
 
-  handleChange(event) {
-    this.setState(
-      {
-        [event.target.name]: event.target.value,
-      },
-      console.log(event.target.name),
-      console.log(event.target.value)
-    );
+  handleDeleteWork(id) {
+    this.setState(() => ({
+      workExperienceArr: this.state.workExperienceArr.filter(
+        (workObj) => workObj.id !== id
+      ),
+    }));
+  }
+
+  handleSaveEditedWork(arr) {
+    this.setState({
+      workExperienceArr: arr,
+    });
+  }
+
+  handleSubmitApplication(event) {
+    event.preventDefault();
+    const data = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      phone: this.state.phone,
+      residence: this.state.residence,
+      educationArr: this.state.educationArr,
+      workExperienceArr: this.state.workExperienceArr,
+    };
+
+    this.props.onComplete(data);
+    console.log(data);
+  }
+
+  validateFormInput(event) {
+    event.preventDefault();
+    console.log("hello");
+
+    const formErrors = { ...this.state.someProperty };
+
+    if (!this.state.email && !this.state.confirmEmail) {
+      formErrors.validateEmail = "Enter valid email address";
+      formErrors.validateConfirmEmail = "Please confirm email address";
+
+      this.setState(
+        { formErrors },
+        console.log(this.state.email),
+        console.log(this.state.confirmEmail)
+      );
+      return;
+    }
+
+    if (!this.state.confirmEmail) {
+      formErrors.validateConfirmEmail = "Please confirm email address";
+      this.setState({ formErrors }, console.log(this.state.confirmEmail));
+      return;
+    }
+
+    if (this.state.email !== this.state.confirmEmail) {
+      formErrors.validateConfirmEmail = "Both email's must match";
+
+      this.setState(
+        { formErrors },
+        console.log(this.state.email),
+        console.log(this.state.confirmEmail)
+      );
+      return;
+    }
+
+    if (!this.state.confirmEmail) {
+      formErrors.validateEmail = "Confirm email should not be empty";
+
+      this.setState({ formErrors }, console.log(this.state.confirmEmail));
+      return;
+    }
+
+    this.handleSubmitApplication(event);
   }
 
   render() {
-    const { applicant, educationDisplayed, workDisplayed, educationList } =
-      this.state;
+    const {
+      firstName,
+      lastName,
+      email,
+      confirmEmail,
+      residence,
+      phone,
+      educationDisplayed,
+      workDisplayed,
+      educationList,
+      educationArr,
+      workList,
+      workExperienceArr,
+      formErrors,
+    } = this.state;
 
     return (
       <div className="cv-body">
         <div className="application-form">
-          <form className="form-body" onSubmit={this.handleSubmit}>
+          <div className="form-body" onSubmit={this.handleSubmit}>
             <div className="personal-info-section">
               <h2 className="personal-info-header">Personal Information</h2>
               <ApplicantInfo
-                generalInfo={applicant}
-                onInputChange={this.handleChange}
+                handleSubmit={this.validateFormInput}
+                firstName={firstName}
+                lastName={lastName}
+                email={email}
+                confirmEmail={confirmEmail}
+                residence={residence}
+                phone={phone}
+                handleInputChange={this.handleChange}
+                formErrors={formErrors}
               />
             </div>
             <div className="school-info-section">
@@ -117,36 +215,47 @@ class ApplicationForm extends React.Component {
                 <h2>Education</h2>
                 <AddButton
                   handleClick={() =>
-                    this.handleClickDisplay("educationDisplayed")
+                    this.handleShowDisplay("educationDisplayed")
                   }
                 />
               </div>
               {educationDisplayed && (
                 <SchoolInfo
-                  schoolData={applicant}
-                  onInputChange={this.handleChange}
-                  cancelEvent={this.handleCancelDisplay}
+                  cancelEvent={this.handleHideDisplay}
                   saveEvent={this.handleSaveEducation}
                 />
               )}
-              {educationList && <RenderList props={applicant} />}
+              {educationList && (
+                <RenderEducationList
+                  arr={educationArr}
+                  deleteEvent={this.handleDeleteEducation}
+                  saveEditEvent={this.handleSaveEditedEducation}
+                />
+              )}
             </div>
             <div className="work-info-section">
               <div className="work-info-header">
                 <h2>Work Experience</h2>
                 <AddButton
-                  handleClick={() => this.handleClickDisplay("workDisplayed")}
+                  handleClick={() => this.handleShowDisplay("workDisplayed")}
                 />
               </div>
               {workDisplayed && (
                 <WorkExperience
-                  workData={applicant}
-                  onInputChange={this.handleChange}
+                  cancelEvent={this.handleHideDisplay}
+                  saveEvent={this.handleSaveWorkExperience}
+                />
+              )}
+              {workList && (
+                <RenderWorkList
+                  arr={workExperienceArr}
+                  deleteEvent={this.handleDeleteWork}
+                  saveEditEvent={this.handleSaveEditedWork}
                 />
               )}
             </div>
-            <button className="submit-btn">Submit</button>
-          </form>
+            <SubmitBtn />
+          </div>
         </div>
       </div>
     );

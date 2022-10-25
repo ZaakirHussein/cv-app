@@ -45,6 +45,7 @@ header {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  overflow: auto;
 }
 
 .application-form {
@@ -54,7 +55,7 @@ header {
   padding: 1rem;
   justify-content: center;
   margin-top: 2rem;
-  width: fit-content;
+  max-width: fit-content;
 }
 
 .form-body {
@@ -68,7 +69,7 @@ header {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding: 3rem 4rem;
+  padding: 2rem 4rem;
 }
 .school-info,
 .work-info {
@@ -79,12 +80,6 @@ header {
   padding: 3rem 4rem;
   background-color: rgb(247, 247, 247);
   border-radius: 2rem;
-}
-
-.school-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .study-dates,
@@ -122,6 +117,7 @@ h2 {
 .label-required,
 label {
   padding-bottom: 0.5rem;
+  padding-right: 0.3rem;
   font-size: 1.4rem;
 }
 
@@ -129,12 +125,31 @@ label {
   content: " *";
   color: red;
 }
+
+.error-message {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: red;
+  margin-top: 0.2rem;
+}
+
+.phone-label {
+  padding-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
 .school-info-header,
 .work-info-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0px;
+}
+
+.school-info-form,
+.work-info-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .add-btn {
@@ -272,4 +287,272 @@ label {
   padding-left: 0.5rem;
   padding-top: 0.5rem;
   width: 100%;
+}
+
+.grad-logo,
+.work-logo,
+.contact-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f7f7f7;
+  border: 1px solid #dedede;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+#grad-img,
+#work-img,
+#contact-img {
+  font-size: 2rem;
+}
+
+.education-list-item,
+.work-list-item,
+.contact-list-item {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin: 2rem 0rem;
+}
+
+.school-detail-container .work-detail-container,
+.contact-detail-container {
+  display: flex;
+  flex-direction: column;
+}
+.school-detail-header,
+.work-detail-header,
+.contact-detail-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+#school-name,
+#work-name {
+  font-size: 1.6rem;
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+#major,
+#position {
+  font-size: 1.2rem;
+  font-style: italic;
+  padding-bottom: 0.4rem;
+}
+
+.work-right {
+  margin-top: 0.3rem;
+  max-width: 500px;
+}
+
+.education-left,
+.work-left,
+.contact-left {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.education-right {
+  vertical-align: top;
+}
+
+#ellipsis {
+  font-size: 2.5rem;
+}
+
+#ellipsis:hover {
+  cursor: pointer;
+}
+
+#responsibilities {
+  margin-top: 0.3rem;
+  max-width: 600px;
+}
+.ellipsis-storage {
+  display: flex;
+  justify-content: flex-end;
+}
+.ellipsis-btn {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.menu-btn {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.2rem;
+  background-color: white;
+  border: none;
+  z-index: 1000;
+}
+
+.menu-btn:hover {
+  filter: brightness(95%);
+  cursor: pointer;
+}
+
+.edit-education-container,
+.edit-work-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.submit-btn-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0rem;
+}
+
+#submit-btn {
+  width: 20%;
+  padding: 1rem;
+  background-color: rgb(0, 131, 72);
+  cursor: pointer;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  font-family: Circular, Helvetica, sans-serif;
+}
+
+#submit-btn {
+  appearance: none;
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+#submit-btn:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+#submit-btn:hover {
+  background-color: #2c974b;
+}
+
+#submit-btn:focus {
+  box-shadow: rgba(46, 164, 79, 0.4) 0 0 0 3px;
+  outline: none;
+}
+
+#submit-btn:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: default;
+}
+
+#submit-btn:active {
+  background-color: #298e46;
+  box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
+}
+
+/* Applicant Preview Page */
+.applicant-preview {
+  display: flex;
+  justify-content: center;
+  background-image: url("/src/images/celticscrowd.jpeg");
+  width: 100vw;
+  height: 90vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 1);
+  background-blend-mode: luminosity;
+  overflow: auto;
+}
+
+.applicant-display-info {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 2rem;
+  width: 60vw;
+  height: fit-content;
+}
+
+.thankyou-container {
+  display: flex;
+  justify-content: center;
+}
+#thank-you {
+  max-width: 100%;
+  max-height: 180px;
+  padding: 1rem;
+}
+
+.name-container {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(0, 131, 72);
+  color: white;
+}
+
+.name-display {
+  font-size: 3rem;
+  font-family: "Raleway", sans-serif;
+}
+.display-applicant-data {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid rgb(0, 131, 72);
+}
+
+.applicant-top-data {
+  display: flex;
+  padding: 0rem 1rem;
+}
+
+.display-applicant-contact,
+.display-applicant-education {
+  width: 50%;
+}
+
+.display-applicant-work {
+  padding: 0rem 1rem;
+}
+
+.display-contact-details {
+  font-size: 1.6rem;
 }
