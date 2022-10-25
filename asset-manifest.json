@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/cv-project/static/css/main.ba521e8c.css",
+    "main.js": "/cv-project/static/js/main.6433c9a7.js",
+    "static/js/787.34a20539.chunk.js": "/cv-project/static/js/787.34a20539.chunk.js",
+    "static/media/celticscrowd.jpeg": "/cv-project/static/media/celticscrowd.d127889ae449185734f1.jpeg",
+    "static/media/shapelined-_JBKdviweXI-unsplash.jpg": "/cv-project/static/media/shapelined-_JBKdviweXI-unsplash.33b5ad7f1f7b64b30f23.jpg",
+    "static/media/ThankYou.png": "/cv-project/static/media/ThankYou.a3956c6e5e78c6789ce7.png",
+    "static/media/celtics_secondary.svg": "/cv-project/static/media/celtics_secondary.223f76f46d55fe65dedd0015bcb0eecb.svg",
+    "index.html": "/cv-project/index.html",
+    "main.ba521e8c.css.map": "/cv-project/static/css/main.ba521e8c.css.map",
+    "main.6433c9a7.js.map": "/cv-project/static/js/main.6433c9a7.js.map",
+    "787.34a20539.chunk.js.map": "/cv-project/static/js/787.34a20539.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ba521e8c.css",
+    "static/js/main.6433c9a7.js"
+  ]
+}
